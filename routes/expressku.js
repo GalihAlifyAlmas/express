@@ -1,19 +1,30 @@
 exports.home = function (req, res) {
-    res.render('home');
+    req.getConnection(function (err, connect) {
+        var query = connect.query('SELECT * FROM news_tbl', function (err, rows) {
+            if (err) {
+                console.log('Error massage: %', err);
+            }
+
+            res.render('home', {
+                page_tittle: "Express News",
+                data: rows
+            });
+        });
+    });
 }
 
-exports.home = function (req, res) {
-    res.render('home');
+exports.news = function (req, res) {
+    res.render('news');
 }
 
-exports.home = function (req, res) {
-    res.render('home');
+exports.about = function (req, res) {
+    res.render('about');
 }
 
-exports.home = function (req, res) {
-    res.render('home');
+exports.contact = function (req, res) {
+    res.render('contact');
 }
 
-exports.home = function (req, res) {
-    res.render('home');
+exports.gallery = function (req, res) {
+    res.render('gallery');
 }
