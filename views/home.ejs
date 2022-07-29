@@ -105,20 +105,27 @@
 					<div class="row">
 						<!--- Start Content Right Bottom --->
 						<h1>Headlines</h1>
-                        						
+                        <%
+							if (data.length) {
+								for (var i=0; i < data.length; i++) {
+						%>						
                         <div class="media">
 							<a href="#" class="pull-left">
-								<img class="media-object" src="/public/images/gopego_abu_dhabi.jpg" alt="News 1">
+								<img class="media-object" src="/public/news_images/<%=data[i].images%>" alt="News 1">
 							</a>
 							<div class="media-body">
-								<a href="" class="link_detail"><h3 class="media-heading">Awesome Piece of Works </h3></a>
+								<a href="" class="link_detail"><h3 class="media-heading"><%=data[i].title%></h3></a>
 								<p>
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a ipsum nec ante rhoncus rhoncus. Vestibulum fringilla vitae justo eu euismod. Cras luctus, enim in malesuada adipiscing, massa dolor tincidunt urna, id iaculis erat ante nec dolor. Aenean sit amet pulvinar augue. Mauris tincidunt vel quam eu ultrices. Vivamus tempus vestibulum commodo.
+									<%=data[i].description.substring(0, 300)%>
                                 </p>
                                 <a href="" class="link_detail">Read More</a>						
 							</div>
 						</div>
-						<!-->div class="media">
+						<%
+								}
+							}
+						%>
+						<!--<div class="media">
 							<a href="#" class="pull-left">
 								<img class="media-object" src="/public/images/gopego_london.jpg" alt="News 2">
 							</a>
@@ -141,7 +148,7 @@
                                 </p>
                                 <a href="" class="link_detail">Read More</a>							
 							</div>
-						</div>
+						</div>-->
                         											
 						<!--- End Content Right Bottom --->
 					</div>

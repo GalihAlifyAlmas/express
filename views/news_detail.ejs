@@ -3,9 +3,12 @@
   	<head>
         <meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-      	<title>Bootstrap Intro</title>
-        <link type="text/css" rel="stylesheet" href="public/css/bootstrap.css">
-        <link type="text/css" rel="stylesheet" href="public/css/mystyle.css">
+      	<title><%=page_tittle%></title>
+        <link type="text/css" rel="stylesheet" href="/public/css/bootstrap.css">
+        <link type="text/css" rel="stylesheet" href="/public/css/mystyle.css">
+		<link rel="stylesheet" href="/public/lightbox/css/lightbox.css" type="text/css"/>
+		<script src="/public/lightbox/js/jquery-1.11.0.min.js"></script>
+		<script src="/public/lightbox/js/lightbox.js"></script>
     </head>
    	<body>
 	
@@ -71,16 +74,24 @@
 					<div class="row carousel-holder">
 						<div class="col-md-12">
 						<!--- Start Carousel --->
+						<%
+							if (data.length) {
+								for (var i=0; i < data.length; i++) {
+						%>	
 						<div class="newsitemd">
 					
-							<h2 class="news_title">Bukan PDIP, Siapa Pemilik Domain Internet "Jokowi.id"?</h2>
-							<p class="crt_date">Create date : 27-3-2014</p>
+							<h2 class="news_title"><%=data[i].title%></h2>
+							<p class="crt_date"><%=data[i].createdate%></p>
 							<div class="clear"></div>
 							<p class="news_desc">
-							<img src="news_images/jokowi.id.jpg" align="left">
-							JAKARTA, KOMPAS.com � Nama domain internet "Jokowi.id" ternyata telah didaftarkan dan dibeli. Siapakah pemiliknya dan akan digunakan untuk apa? Pengelola Nama Domain Internet Indonesia (Pandi) mengakui bahwa alamat situs "Jokowi.id" telah didaftarkan pada Senin (24/3/2014). Namun, Pandi enggan mengungkap siapa pihak yang mendaftarkan nama domain tersebut. "Kami harus menjaga kerahasiaan. Kami tidak bisa memberitahukan siapa pendaftarnya. Yang jelas, kami menjamin pendaftaran bahwa nama domain ini sudah sesuai dengan semua aturan pendaftaran nama domain 'Apapun.id' pada periode Sunrise," kata Ketua Pandi Sigit Widodo saat dihubungi KompasTekno. Periode Sunrise merupakan tahap pertama pendaftaran nama domain internet "Apapun.id" atau populer disebut "Anything.id". Pendaftaran dan penjualan nama domain ".id" di tahap ini secara eksklusif diperuntukkan bagi para pemegang merek, sejak 20 Januari sampai 17 April 2014. Hingga kini, sebanyak 285 nama domain internet ".id" telah dibeli oleh para pemegang merek. KompasTekno melakukan penelusuran tentang pemilik nama domain internet "Jokowi.id". Ternyata, alamat tersebut bukan dibeli oleh partai pengusung Joko Widodo, PDI Perjuangan (PDI-P), melainkan oleh Sekretariat Nasional Jaringan Organisasi dan Komunitas Warga Indonesia (Seknas Jokowi), sebuah organisasi masyarakat pendukung Jokowi. Salah seorang Presidium Seknas Jokowi, Sammy Pangerapan, mengakui bahwa pihaknya telah membeli domain "Jokowi.id" dan diberi amanat secara resmi oleh Jokowi untuk mengelola situs tersebut. Pihaknya bisa membeli nama domain itu karena telah mematenkan nama organisasi "Sekretariat Nasional Jaringan Organisasi dan Komunitas Warga Indonesia." Singkatan "Seknas Jokowi" juga telah dipatenkan di Kementerian Hukum dan Hak Asasi Manusia. "Nama domain tersebut akan kami gunakan untuk kepentingan Joko Widodo dalam pemilu dan kampanye lain setelah pemilu," kata Sammy. Situs "Jokowi.id" dijadwalkan mulai aktif setelah tanggal 17 April 2014. Pandi, pengelola nama domain internet Indonesia, berharap bakal calon presiden lainnya dapat memanfaatkan nama domain dengan akhiran ".id" sebagai situs resmi. "Domain '.id' ini merupakan domain tepercaya. Jika menggunakan nama domain selain '.id', bisa saja lawan capres membuat situs palsu untuk menyebarkan informasi yang tidak benar dan merugikan capres yang bersangkutan," lanjut Sigit. Pandi mempersilakan "Jokowi.id" untuk mulai diaktifkan setelah 17 April 2014 karena tanggal tersebut merupakan batas akhir pendaftaran domain internet ".id" bagi pemegang merek.
+								<a class="" href="/public/news_images/<%=data[i].images%>" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img src="/public/news_images/<%=data[i].images%>" align="left"></a>
+							<%=data[i].description%>
 							</p>
 						</div>
+						<%
+								}
+							}
+						%>
 						
 		   <!------------- Form Comment ---------------------------------------------->
 						 <form class="comment_form" action="process/adding_comment.php" method="post">				<h4>Leave A Comment</h4>
@@ -98,7 +109,7 @@
 						   
 							 <div class="comment_list">
 								<div class="user_photo">
-								 <img src="photo_member/profile-5.png" />
+								 <img src="/public/photo_member/profile-5.png" />
 								</div>
 								<div class="box_desc">
 								  <h2>Gladis</h2>
@@ -110,7 +121,7 @@
 							
 							<div class="comment_list">
 								<div class="user_photo">
-								 <img src="photo_member/profile-2.jpg" />
+								 <img src="/public/photo_member/profile-2.jpg" />
 								</div>
 								<div class="box_desc">
 								  <h2>Supriadi</h2>
@@ -122,7 +133,7 @@
 							
 							<div class="comment_list">
 								<div class="user_photo">
-								 <img src="photo_member/profile-1.jpg" />
+								 <img src="/public/photo_member/profile-1.jpg" />
 								</div>
 								<div class="box_desc">
 								  <h2>Kodir</h2>
@@ -134,7 +145,7 @@
 							
 							<div class="comment_list">
 								<div class="user_photo">
-								 <img src="photo_member/profile-3.jpg" />
+								 <img src="/public/photo_member/profile-3.jpg" />
 								</div>
 								<div class="box_desc">
 								  <h2>Parno</h2>
