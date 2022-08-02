@@ -116,6 +116,7 @@ exports.process_add_news = function(req, res) {
                     console.log('Error input news: %s', err);
                 }
 
+                req.flash('info', 'Success edit data! Data has been updated.');
                 res.redirect('/express/admin/home');
             });
         });
@@ -155,7 +156,71 @@ exports.process_add_news = function(req, res) {
 }
 
 exports.edit_news = function(req, res) {
-    res.render('./admin/home', {
-        pathname: 'edit_news'
+    //tangkap id news dari link edit
+    var id_news = req.params.id_news;
+
+    req.getConnection(function(err, connect) {
+        var sql = "SELECT * FROM news_tbl WHERE id_news=?";
+
+        var query = connect.query(sql, id_news, function(err, results) {
+            if (err) {
+                console.log('Error show news: %s', err);
+            }
+
+            res.render('./admin/home', {
+                id_news: id_news, 
+                pathname: 'edit_news',
+                data: results
+            });
+        });
+
+    });
+}
+
+exports.process_edit_news = function(req, res) {
+    var id_news = req.params.id_news;
+
+    var storage = multer.diskStorage({
+        description: './public/news_images',
+        filename: function(req, file, callback) {
+            callback(null, file.originalname);
+        }
+    });
+
+    var upload = multer({ storage: storage }).single('image');
+    var date = new Date(Date.now());
+
+    upload(req, res, function(err) {
+        if (err) {
+            var image = req.body.image_old;
+            console.log("Error uploading image!");
+        } else if (req.file == undefined) {
+            var image = req.body.image_old;
+        } else {
+            var image = req.file.filename;
+        }
+
+        console.log(req.file);
+        console.log(req.body);
+
+        req.getConnection(function(err, connect) {
+            var post = {
+                title: req.body.title,
+                description: req.body.description,
+                images: image,
+                createdate: date  
+            }
+
+            var sql = "UPDATE news_tbl SET ? WHERE id_news=?";
+
+            var query = connect.query(sql, [post, id_news], function(err, results) {
+                if (err) {
+                    console.log("Error edit news: %s", err);               
+                 }
+
+                 req.flash('info', 'Success edit data! Data has been updated.');
+                 res.redirect('/express/admin/home');
+            });
+        });
     });
 }

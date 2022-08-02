@@ -4,6 +4,7 @@ var logger = require('morgan');
 var path = require ('path');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var flash = require('express-flash');
 
 var expressku = require('./routes/expressku');
 var adminku = require('./routes/adminku');
@@ -19,6 +20,7 @@ app.use(logger('dev'));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(flash());
 
 app.use(
     conn(mysql, {
@@ -62,7 +64,8 @@ app.get('/express/admin/login', adminku.login);
 app.get('/express/admin/home', adminku.home);
 app.get('/express/admin/add_news', adminku.add_news);
 app.post('/express/admin/add_news', adminku.process_add_news);
-app.get('/express/admin/edit_news', adminku.edit_news);
+app.get('/express/admin/edit_news/:id_news', adminku.edit_news);
+app.post('/express/admin/edit_news/:id_news', adminku.process_edit_news);
 
 app.listen(app.get('port'), function() {
     console.log('Server is running on port ' + app.get('port'))
